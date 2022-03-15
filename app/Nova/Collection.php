@@ -45,7 +45,7 @@ class Collection extends Resource
             ID::make(__('ID'), 'id')->sortable(),
             Text::make('Name')->sortable(),
             Date::make('Created_at'),
-            Date::make('Updated_at'),
+            Date::make('Ozgartirilgan_vaqti'),
             
         ];
     }
