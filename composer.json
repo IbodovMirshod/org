@@ -11,10 +11,14 @@
         "php": "^7.3|^8.0",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
+        "gregoriohc/laravel-nova-theme-responsive": "^0.8.1",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.0",
+        "laravel/nova": "*",
         "laravel/tinker": "^2.0",
-        "laravel/nova": "*"
+        "rimu/formatted-number": "^0.2.0",
+        "simplesquid/nova-advanced-number-field": "^2.0",
+        "yassi/nova-nested-form": "^3.0"
     },
     "repositories": [
         {

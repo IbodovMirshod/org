@@ -4,24 +4,22 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\DateTime;
-use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Rimu\FormattedNumber\FormattedNumber;
 use SimpleSquid\Nova\Fields\AdvancedNumber\AdvancedNumber;
-use Yassi\NestedForm\NestedForm;
 
-class Collection extends Resource
+
+class Tools extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Collection::class;
+    public static $model = \App\Models\Tool::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -36,7 +34,7 @@ class Collection extends Resource
      * @var array
      */
     public static $search = [
-        'id', 'name'
+        'id','name','serial_number'
     ];
 
     /**
@@ -49,17 +47,15 @@ class Collection extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make('Texnika nomi', 'name')->sortable(),
+            Text::make('Mahsulot nomi','name')->rules('required','max:255')->sortable(),
+            Text::make('Seria raqam','serial_number')->rules('required','max:255')->sortable(),
             FormattedNumber::make('Narxi', 'price')->hideFromDetail()->hideFromIndex(),
             AdvancedNumber::make('Narxi', 'price')
                 ->decimals(0)
                 ->suffix(' sum')
                 ->thousandsSeparator(',')
-                ->min(0)->hideWhenCreating()->hideWhenCreating(),
-            BelongsTo::make('Kimga tegishli', 'user', 'App\Nova\User')->nullable()->showCreateRelationButton(),
-            DateTime::make('O`zgartirilgan vaqti', 'updated_at')->hideWhenCreating()->hideWhenUpdating(),
-            NestedForm::make('Qismlar', 'tools', 'App\Nova\Tools'),
-            HasMany::make('Qismlar', 'tools', 'App\Nova\Tools'),
+                ->min(0)->hideWhenCreating()->hideWhenUpdating(),
+            BelongsTo::make('Qaysi texnikaga tegisli', 'collection', 'App\Nova\Collection')->nullable()->showCreateRelationButton(),
         ];
     }
 
